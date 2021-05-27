@@ -1,2 +1,2 @@
 # iDisk
-UMLS and MEDDRA data from https://conservancy.umn.edu/handle/11299/204783
+Integrated Dietary Supplement Knowledge Base (iDISK)from https://conservancy.umn.edu/handle/11299/204783

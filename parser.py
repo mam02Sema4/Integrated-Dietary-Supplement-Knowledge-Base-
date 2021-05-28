@@ -4,7 +4,8 @@ import json
 
 rel_results={}
 rel_sources={}
-doc=[]
+doc={}
+
 source_part=[]
 current=0
 
@@ -15,10 +16,10 @@ mrrel_df.rename(columns={'SAB':'REL_SOURCE'},inplace=True)
 mrconso_df=pd.read_csv('MRCONSO.RRF',sep="|",dtype={'CUI': 'string', 'AUI': 'string', 'STR': 'string', 'SAB': 'string', 'SCODE': 'string', 'ISPREF': 'string'})
 mrconso_df.rename(columns={'SAB':'ATOM_SOURCE'},inplace=True)
 
-### Only include rows from UMLS and MEDDRA
+### Only include rows from UMLS and MEDDRA sources
 mrconso_rows=mrconso_df.loc[(mrconso_df['ATOM_SOURCE'] == 'UMLS') | (mrconso_df['ATOM_SOURCE'] == 'MEDDRA')]
 
-### Loop every CUI1 from the MRREL files
+### Loop every CUI1 from the MRREL file
 ids=mrrel_df.query('CUI1 in @mrconso_rows.CUI').drop_duplicates(subset=['CUI1'])
 
 with open('data.json', 'a') as outfile:
@@ -73,18 +74,18 @@ with open('data.json', 'a') as outfile:
 
   
   ###Every atom from cui1 has the same copy in the json file
-  i=0
   mrconso_rows_tmp=mrconso_rows.loc[(mrconso_rows['CUI'] == cui)].drop_duplicates(subset=['SCODE','STR','ATOM_SOURCE'])
   for index, row in mrconso_rows_tmp.iterrows():
        s_scode=row['SCODE']
        s_str=row['STR']
        sab=row['ATOM_SOURCE']
        _id=sab+":"+s_scode
-       doc.append({"_id": _id,"name": s_str ,sab.lower(): sab+":"+s_scode})
+       rec={"name": s_str ,sab.lower(): sab+":"+s_scode}
        for rel,doc1 in rel_results.items():
-           doc[i][rel]=doc1
-       i+=1 
-  rel_results={}      
-  json.dump(doc, outfile, indent=4) ###Dump json objects into file
-  doc=[]
+           rec[rel]=doc1
+       doc.setdefault(_id,rec) 
+  rel_results={} 
+     
+ json.dump(doc, outfile, indent=4) ###Dump json objects into file
+ 
 

@@ -1,0 +1,15 @@
+{
+    "version": "0.1",
+    "__metadata__": {
+      "license_url": "https://conservancy.umn.edu/bitstream/handle/11299/204783/README.htm",
+      "url": "https://conservancy.umn.edu/handle/11299/204783"
+    }, 
+    "dumper" : {
+        "data_url" : ["https://conservancy.umn.edu/bitstream/handle/11299/204783/idisk-rrf-1.0.1-2020-01-28.zip"],
+        "uncompress" : true
+    },
+    "uploader" : {
+        "parser" : "parser:load_data",
+        "on_duplicates" : "error"
+    }
+}

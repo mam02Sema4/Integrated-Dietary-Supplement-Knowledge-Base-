@@ -7,7 +7,6 @@ def load_data(data_folder):
 
     rel_results={}
     rel_sources={}
-    doc={}
     source_part=[]
     current=0
 
@@ -82,14 +81,10 @@ def load_data(data_folder):
         s_str=row['STR']
         sab=row['ATOM_SOURCE']
         _id=sab+":"+s_scode
-        rec={"name": s_str ,sab.lower(): sab+":"+s_scode}
+        rec={"_id":_id,"name": s_str ,sab.lower(): sab+":"+s_scode}
         for rel,doc1 in rel_results.items():
            rec[rel]=doc1
-        doc.setdefault(_id,rec) 
-      rel_results={} 
+        yield rec
+      rel_results={}
    
-    return doc  
-
-
- 
 

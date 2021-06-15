@@ -25,9 +25,10 @@ def load_data(data_folder):
 
     ### Loop every CUI1 from the MRREL file
     ids=mrrel_df.query('CUI1 in @mrconso_rows.CUI').drop_duplicates(subset=['CUI1'])
+    total_records=len(ids['CUI1'])
     for item in ids['CUI1']:
       current+=1
-      print("current count:",current)
+      print("Progress:",current+"/"+total_records)
       cui1=item.strip()
       mrrel_rows=mrrel_df.loc[(mrrel_df['CUI1'] == cui1)]
 

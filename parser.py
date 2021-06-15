@@ -28,7 +28,7 @@ def load_data(data_folder):
     total_records=len(ids['CUI1'])
     for item in ids['CUI1']:
       current+=1
-      print("Progress:",current+"/"+total_records)
+      print("Progress:",str(current)+"/"+str(total_records))
       cui1=item.strip()
       mrrel_rows=mrrel_df.loc[(mrrel_df['CUI1'] == cui1)]
 

@@ -71,7 +71,8 @@ def load_data(data_folder):
         source_part=[]
         source_part.append(rel_sources)
         source_part.append(rel_sources1)
-        json_dict = {'name':t_str,atom_source.lower():atom_source+":"+t_scode,'source':source_part}
+        #json_dict = {'name':t_str,atom_source.lower():atom_source+":"+t_scode,'source':source_part}
+        json_dict = {'name':t_str,atom_source.lower():t_scode,'source':source_part}
         rel_results.setdefault(rel,[]).append(json_dict)
 
   
@@ -82,7 +83,8 @@ def load_data(data_folder):
         s_str=row['STR']
         sab=row['ATOM_SOURCE']
         _id=sab+":"+s_scode
-        rec={"_id":_id,"name": s_str ,sab.lower(): sab+":"+s_scode}
+        #rec={"_id":_id,"name": s_str ,sab.lower(): sab+":"+s_scode}
+        rec={"_id":_id,"name": s_str ,sab.lower(): s_scode}
         for rel,doc1 in rel_results.items():
            rec[rel]=doc1
         yield rec
